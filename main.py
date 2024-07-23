@@ -1,17 +1,19 @@
 import os
 import shutil
 import sqlite3
-
-def search_for_cheats(directory):
+def serch_chects_game(directory):
+    rashirenie = ['.dll', '.vdf', '.bat', '.exe', '.msi']
     cheat_signatures = [
         # сигнатуры читов
         b'\xE8\x00\x00\x00\x00\x5D\xE9\x00\x00\x00\x00\x55\x8B\xEC',
 
     ]
-
-    # данные
-    search_directories = ['XONE', 'midnight', 'interium', 'exloader', 'cheat', 'neverlose', 'aimstar', 'Tkaser', 'osiris', 'sakura', 'aqua', 'aura']
-
+    search_directories = ['XONE', 'midnight', 'interium', 'exloader', 'cheat', 'neverlose', 'aimstar', 'Tkaser',
+                          'osiris', 'sakura', 'aqua', 'aura', 'Xone', 'D3m', 'ExtrimHack', 'EZfrags', 'Shark',
+                          'Midnight', 'RHcheats', 'FREEQN', 'Aqua', 'Boomwtf', 'Pphud', 'Yeahnot', 'INDIGO', 'FRUX0',
+                          'REKTWARE', 'MUTINY', 'hack', 'cheat', 'Yeahnot', 'чит', 'loader', 'Eternity.cc', 'KlarWare',
+                          'bhop', 'esp', 'otc', 'gamesense', 'memesense', 'aimware', 'legendware', 'crack', 'onetap',
+                          'avira', 'boberhook', 'pphud', 'nemesis', 'nixware']
     for root, dirs, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(root, file)
@@ -24,22 +26,45 @@ def search_for_cheats(directory):
             except (PermissionError, FileNotFoundError):
                 print(f"Нет доступа: {file_path}")
 
+
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(rashirenie):
+                print(os.path.join(root, file))
+    for dir in search_directories:
+        dir_path = os.path.join(root, dir)
+        if os.path.exists(dir_path):
+            print(f"Подозрительная папка: {dir_path}")
+def search_for_cheats(directory):
+    cheat_signatures = [
+        # сигнатуры читов
+        b'\xE8\x00\x00\x00\x00\x5D\xE9\x00\x00\x00\x00\x55\x8B\xEC',
+
+    ]
+
+    # данные
+    search_directories = ['XONE', 'midnight', 'interium', 'exloader', 'cheat', 'neverlose', 'aimstar', 'Tkaser', 'osiris', 'sakura', 'aqua', 'aura', 'Xone', 'D3m', 'ExtrimHack', 'EZfrags', 'Shark', 'Midnight', 'RHcheats', 'FREEQN', 'Aqua', 'Boomwtf', 'Pphud', 'Yeahnot', 'INDIGO', 'FRUX0', 'REKTWARE', 'MUTINY', 'hack', 'cheat', 'Yeahnot', 'чит',  'loader', 'Eternity.cc', 'KlarWare', 'bhop', 'esp', 'otc', 'gamesense', 'memesense', 'aimware',  'legendware', 'crack', 'onetap', 'avira', 'boberhook',  'pphud', 'nemesis', 'nixware']
+
+    for root, dirs, files in os.walk(directory):
         # Поиск удаленных
         for dir in dirs:
             dir_path = os.path.join(root, dir)
             if not os.path.exists(dir_path):
                 print(f"Удаленная папка: {dir_path}")
 
-        for file in files:
-            file_path = os.path.join(root, file)
-            if not os.path.exists(file_path):
-                print(f"Удаленный файл: {file_path}")
+        #for file in files:
+            #file_path = os.path.join(root, file)
+            #if not os.path.exists(file_path):
+             #   print(f"Удаленный файл: {file_path}")
 
         # Поиск
         for dir in search_directories:
             dir_path = os.path.join(root, dir)
             if os.path.exists(dir_path):
                 print(f"Подозрительная папка: {dir_path}")
+                print('Проверяю.........')
+
+
 
 def search_browser_history(browser_name):
     # Путь к истории
@@ -68,6 +93,9 @@ def search_browser_history(browser_name):
 
     conn.close()
 
+
+#поиск в папке с игрой
+
 # начинаем поиск по нужным директориям
 search_for_cheats('C:\\')  # Main drive
 search_for_cheats('D:\\')  # Secondary drive (if available)
@@ -78,7 +106,7 @@ search_for_cheats(os.path.expanduser('~\\AppData\\Roaming\\Microsoft\\Windows\\R
 search_for_cheats(os.path.expanduser('~\\AppData\\Local\\Microsoft\\Windows\\Explorer'))  # Recycle Bin
 
 # поиск по истории
-search_browser_history('chrome')
-search_browser_history('firefox')
-search_browser_history('yandex')
-search_browser_history('opera')
+#search_browser_history('chrome')
+#search_browser_history('firefox')
+#search_browser_history('yandex')
+#search_browser_history('opera')
